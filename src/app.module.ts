@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { CategoriesModule } from './categories/categories.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guards';
+import { PostModule } from './Blog/post.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { AuthGuard } from './guards/auth.guards';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    CategoriesModule,
+    PostModule,
     UsersModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
