@@ -6,26 +6,28 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class PostService {
-  constructor(@InjectRepository(Post) private categoryRepo: Repository<Post>) {}
+  constructor(@InjectRepository(Post) private postRepo: Repository<Post>) {}
+
   async create(createPostDto: CreatePostDto) {
-    const post = this.categoryRepo.create(createPostDto);
-    const postData = await this.categoryRepo.save(post);
+    const post = this.postRepo.create(createPostDto);
+    const postData = await this.postRepo.save(post);
     return postData;
   }
 
-  findAll() {
-    return `This action returns all categories`;
+  async findAll() {
+    return await this.postRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string) {
+    return await this.postRepo.findOne({ where: { id } });
   }
 
-  update(id: number, createPostDto: CreatePostDto) {
-    return `This action updates a #${id} category`;
+  async update(id: string, post: CreatePostDto) {
+    return await this.postRepo.update(id, post);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: string) {
+    const result = await this.postRepo.delete(id);
+    return result;
   }
 }

@@ -13,7 +13,8 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const { token } = request.cookies;
     try {
-      await this.jwtService.verifyAsync(token);
+      const payload = await this.jwtService.verifyAsync(token);
+      request.user = payload;
       return true;
     } catch (error) {
       throw new HttpException('token invalid', 401);

@@ -6,18 +6,20 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/post.dto';
 
-@Controller('categories')
+@Controller('posts')
 export class PostController {
   constructor(private readonly PostService: PostService) {}
 
-  @Post('create')
+  @Post()
   // @UseGuards(AuthGuard)
   async create(@Body() createCategoryDto: CreatePostDto) {
-    return await this.PostService.create(createCategoryDto);
+    const post = await this.PostService.create(createCategoryDto);
+    return { message: 'succes', post };
   }
 
   @Get()
@@ -27,16 +29,18 @@ export class PostController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.PostService.findOne(+id);
+    return this.PostService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string) {
-    return this.PostService.update(+id, CreatePostDto);
+  @Put(':id')
+  update(@Param('id') id: string, @Body() data: CreatePostDto) {
+    this.PostService.update(id, data);
+    return { message: 'succes' };
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.PostService.remove(+id);
+    this.PostService.remove(id);
+    return { message: 'succes' };
   }
 }

@@ -19,26 +19,25 @@ export class UsersService {
         username: createUserDto.username,
       },
     });
-    if (finUser) throw new BadRequestException('user all resdy exsisted');
+    if (finUser) throw new BadRequestException('user all ready existed');
     const user = this.userRepo.create(createUserDto);
     const userData = await this.userRepo.save(user);
-    const token = this.jwtService.sign({ user_id: userData.id });
+
+    return userData;
+  }
+  async login(data: CreateUserDto) {
+    const user = await this.userRepo.findOne({
+      where: { username: data.username },
+    });
+    if (!user) throw new BadRequestException('user not found');
+    const token = this.jwtService.sign({ user_id: user.id });
     return token;
   }
-
-  findAll() {
-    return `This action returns all users`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async profile(user: any) {
+    const findUser = await this.userRepo.findOne({
+      where: { username: user.username },
+    });
+    if (!user) throw new BadRequestException('user not found');
+    return findUser;
   }
 }

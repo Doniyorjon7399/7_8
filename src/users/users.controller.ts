@@ -7,21 +7,31 @@ import {
   Param,
   Delete,
   Res,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
-@Controller('users')
+import { AuthGuard } from 'src/guards/auth.guards';
+@Controller('auth')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('create')
-  async create(
-    @Body() createUserDto: CreateUserDto,
+  async create(@Body() createUserDto: CreateUserDto) {
+    const token = await this.usersService.create(createUserDto);
+    return {
+      message: 'succes',
+    };
+  }
+  @Post('login')
+  async login(
+    @Body()
+    createUserDto: CreateUserDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const token = await this.usersService.create(createUserDto);
+    const token = await this.usersService.login(createUserDto);
     res.cookie('token', token, {
       httpOnly: true,
     });
@@ -32,23 +42,23 @@ export class UsersController {
     };
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
-  }
+  @Post('logout')
+  @UseGuards(AuthGuard)
+  async logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('token');
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+    return {
+      message: 'succes',
+    };
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  @Get('profile')
+  @UseGuards(AuthGuard)
+  async profile(@Req() req: any, @Res({ passthrough: true }) res: Response) {
+    const user = req.user;
+    const userData = await this.usersService.profile(user);
+    return {
+      message: 'succes',
+      userData,
+    };
   }
 }

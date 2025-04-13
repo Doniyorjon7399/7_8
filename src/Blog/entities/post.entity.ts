@@ -5,7 +5,9 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 })
 export class Post {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
   @Column()
-  name: string;
+  title: string;
+  @Column()
+  description: string;
 }

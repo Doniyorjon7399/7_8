@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "42e8d1ff-e89d-42f6-82f4-9459c7d010e9",
+		"name": "7_8",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40691366",
+		"_collection_link": "https://galactic-firefly-264275.postman.co/workspace/test~9aef45b2-3265-452f-9a8f-3f74f14dd839/collection/40691366-42e8d1ff-e89d-42f6-82f4-9459c7d010e9?action=share&source=collection_link&creator=40691366"
+	},
+	"item": [
+		{
+			"name": "Yangi foydalanuvchi ro'yxatdan o'tkazish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"ahrorcwed34\",\n    \"password\":\"cmvcwe45\",\n    \"age\":23,\n    \"balance\":123000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/auth/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tizimga kirish va cookie o'rnatish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"ahrorcwed34\",\n    \"password\":\"cmvcwe45\",\n    \"age\":23,\n    \"balance\":123000000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tizimdan chiqish va cookie'ni o'chirish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Joriy foydalanuvchi ma'lumotlarini olish",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/auth/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Yangi post yaratish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"mcnfv jc e ewioc eciew cweciew ciew ciq er\",\n    \"description\":\"koc ci3qc 3 c3 i 3iurehcec3cbc 3rc  3i34uerherh rhhyuyburburbuyrb ru burtb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Barcha postlarni olish",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bitta postni ID bo'yicha olish",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/posts/41aec100-08bd-421f-8477-a242991f64f9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"posts",
+						"41aec100-08bd-421f-8477-a242991f64f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Postni tahrirlash",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/posts/41aec100-08bd-421f-8477-a242991f64f9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"posts",
+						"41aec100-08bd-421f-8477-a242991f64f9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Postni o'chirish",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/posts/41aec100-08bd-421f-8477-a242991f64f9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"posts",
+						"41aec100-08bd-421f-8477-a242991f64f9"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
